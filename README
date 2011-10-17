@@ -1,0 +1,7 @@
+CMSIS v2.0 LPC13xx Project Template for GNU ARM Tools
+
+Uses NXP's CMSISv2p00_LPC13xx from http://ics.nxp.com/support/lpcxpresso/
+
+See http://dev.frozeneskimo.com/notes/getting_started_with_cortex_m3_cmsis_and_gnu_tools
+for more information.
+
