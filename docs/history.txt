@@ -1,0 +1,43 @@
+History of updates to CMSISv2p00_LPC13xx
+========================================
+
+28 April 2011
+-------------
+Updated with new LPC13xx.h (dated 2011-04-28). Some registers
+have been renamed, though originals have been left in place
+via the use of unions. It is recommended that code is ported
+to use the new names...
+
+In LPC_SYSCON_TypeDef...
+... SSPCLKDIV => SSP0CLKDIV
+
+In LPC_IOCON_TypeDef...
+... JTAG_TCK_PIO0_10 => SWCLK_PIO0_10
+... JTAG_TDI_PIO0_11 => R_PIO0_11
+... JTAG_TMS_PIO1_0 => R_PIO1_0
+... JTAG_TDO_PIO1_1 => R_PIO1_1
+... JTAG_nTRST_PIO1_2 => R_PIO1_2
+... ARM_SWDIO_PIO1_3 => SWDIO_PIO1_3 
+... SCK_LOC => SCKLOC 
+
+In LPC_ADC_TypeDef...
+... DR0,DR1...DR7 => DR[8] 
+
+In IRQn_Type...
+... SSP_IRQn => SSP0_IRQn
+
+In APB0 peripherals #define's...
+... LPC_SSP_BASE => LPC_SSP0_BASE
+
+Other minor changes to LPC13xx.h due to changes in LPC1300L
+parts. Also added power_api.h for use by LPC1300L parts.
+
+7 March 2011
+------------
+LPC13xx CMSIS 2.0 library project using ARM 
+Cortex-M3 CMSIS files as supplied in ARM's CMSIS 2.0
+December 2010 release, together with device/board 
+specific files from NXP (as previously supplied in
+CMSISv1p30_LPC13xx library project, dated 23 Mar 2010).
+
+Note files are built -Os for both Debug and Release
