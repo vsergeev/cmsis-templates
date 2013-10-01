@@ -1,12 +1,12 @@
 #include <stdint.h>
 
 /* Addresses pulled in from the linker script */
-extern unsigned int _end_stack;
-extern unsigned int _end_text;
-extern unsigned int _start_data;
-extern unsigned int _end_data;
-extern unsigned int _start_bss;
-extern unsigned int _end_bss;
+extern uint32_t _end_stack;
+extern uint32_t _end_text;
+extern uint32_t _start_data;
+extern uint32_t _end_data;
+extern uint32_t _start_bss;
+extern uint32_t _end_bss;
 
 /* CMSIS SystemInit() and application main() */
 extern void SystemInit(void);
@@ -96,7 +96,7 @@ void *vector_table[] __attribute__ ((section(".vectors"))) = {
 };
 
 void Reset_Handler(void) {
-	unsigned int *src, *dst;
+	uint32_t *src, *dst;
 
 	/* Copy data section from flash to RAM */
 	src = &_end_text;
