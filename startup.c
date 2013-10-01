@@ -8,8 +8,7 @@ extern uint32_t _end_data;
 extern uint32_t _start_bss;
 extern uint32_t _end_bss;
 
-/* CMSIS SystemInit() and application main() */
-extern void SystemInit(void);
+/* Application main() called in reset handler */
 extern int main(void);
 
 #define WEAK_ALIAS(x) __attribute__ ((weak, alias(#x)))
@@ -109,7 +108,6 @@ void Reset_Handler(void) {
 	while (dst < &_end_bss)
 		*dst++ = 0;
 
-	SystemInit();
 	main();
 }
 
