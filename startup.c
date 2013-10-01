@@ -21,6 +21,7 @@ void SVC_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
 void DebugMon_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
 void PendSV_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
 void SysTick_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
+
 /* LPC13xx specific interrupt handlers */
 void WAKEUP_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
 void I2C_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
@@ -91,7 +92,7 @@ void *vector_table[] __attribute__ ((section(".vectors"))) = {
 
 void Reset_Handler(void) {
 	unsigned int *src, *dst;
-	
+
 	/* Copy data section from flash to RAM */
 	src = &_end_text;
 	dst = &_start_data;
@@ -105,7 +106,7 @@ void Reset_Handler(void) {
 
 	SystemInit();
 	main();
-}	
+}
 
 void Dummy_Handler(void) {
 	while (1)
