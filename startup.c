@@ -1,5 +1,6 @@
 #include <stdint.h>
 
+/* Addresses pulled in from the linker script */
 extern unsigned int _end_stack;
 extern unsigned int _end_text;
 extern unsigned int _start_data;
@@ -7,42 +8,46 @@ extern unsigned int _end_data;
 extern unsigned int _start_bss;
 extern unsigned int _end_bss;
 
-extern int main(void);
+/* CMSIS SystemInit() and application main() */
 extern void SystemInit(void);
+extern int main(void);
+
+#define WEAK_ALIAS(x) __attribute__ ((weak, alias(#x)))
 
 /* Cortex M3 core interrupt handlers */
 void Reset_Handler(void);
-void NMI_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void HardFault_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void MemManage_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void BusFault_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void UsageFault_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void SVC_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void DebugMon_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void PendSV_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void SysTick_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
+void NMI_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void HardFault_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void MemManage_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void BusFault_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void UsageFault_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void SVC_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void DebugMon_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void PendSV_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void SysTick_Handler(void) WEAK_ALIAS(Dummy_Handler);
 
 /* LPC13xx specific interrupt handlers */
-void WAKEUP_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void I2C_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void TIMER_16_0_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void TIMER_16_1_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void TIMER_32_0_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void TIMER_32_1_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void SSP_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void UART_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void USB_IRQ_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void USB_FIQ_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void ADC_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void WDT_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void BOD_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void EINT3_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void EINT2_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void EINT1_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
-void EINT0_Handler(void) __attribute__ ((weak, alias ("Dummy_Handler")));
+void WAKEUP_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void I2C_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void TIMER_16_0_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void TIMER_16_1_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void TIMER_32_0_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void TIMER_32_1_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void SSP_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void UART_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void USB_IRQ_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void USB_FIQ_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void ADC_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WDT_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void BOD_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void EINT3_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void EINT2_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void EINT1_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void EINT0_Handler(void) WEAK_ALIAS(Dummy_Handler);
 
 void Dummy_Handler(void);
 
+/* Stack top and vector handler table */
 void *vector_table[] __attribute__ ((section(".vectors"))) = {
 	&_end_stack,
 	Reset_Handler,

@@ -24,7 +24,7 @@ SECTIONS {
 		_end_text = .;
 	} >flash
 
-	.data : 
+	.data :
 	{
 		_start_data = .;
 		*(.data)
@@ -39,7 +39,7 @@ SECTIONS {
 	} >sram
 
 	. = ALIGN(4);
-	
+
 	_start_stack = .;
 }
 
