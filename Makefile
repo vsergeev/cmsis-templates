@@ -29,7 +29,7 @@ REMOVE = rm -f
 
 #########################################################################
 
-all: $(PROJECT).hex $(PROJECT).bin stats
+all: $(PROJECT).hex $(PROJECT).bin
 
 $(PROJECT).bin: $(PROJECT).elf
 	$(OBJCOPY) -O binary -S $(PROJECT).elf $(PROJECT).bin

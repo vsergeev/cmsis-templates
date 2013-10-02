@@ -1,8 +1,8 @@
 ## CMSIS v3.20 LPC13xx Project Template for GNU ARM Tools
 
-* Uses CMSIS v3.20 core support from ARM.
+* CMSIS v3.20 core support from ARM in `core/`
 
-* Uses `LPC13xx.h`, `system_lpc13xx.c`, and `system.lpc_13xx.h` from NXP's LPCxpresso CMSISv2p00_LPC13xx.
+* Vendor chip support from NXP's LPCxpresso CMSISv2p00_LPC13xx project in `lpc13xx/`
 
 * Makefile, linker script, and all code in the root directory are 100% public domain.
 
