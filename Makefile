@@ -5,16 +5,18 @@ OBJECTS = lpc13xx/system_LPC13xx.o startup.o main.o
 # Linker script
 LINKER_SCRIPT = lpc1313.dld
 
-OPT = s
+OPT = -Os
 DEBUG =
 INCLUDES = -Icore/ -Ilpc13xx/
-THUMB =
 
 # Compiler Options
-GCFLAGS = -Wall -Wextra -fno-common -mcpu=cortex-m3 -mthumb -O$(OPT) $(DEBUG)
-GCFLAGS += -Wcast-align -Wcast-qual -Wimplicit -Wpointer-arith -Wswitch
-GCFLAGS += -Wredundant-decls -Wreturn-type -Wshadow -Wunused $(INCLUDES)
-LDFLAGS = $(THUMB) -O$(OPT) -nostartfiles -Wl,-Map=$(PROJECT).map -T$(LINKER_SCRIPT) -nostdlib
+CFLAGS = -fno-common -mcpu=cortex-m3 -mthumb
+CFLAGS += $(OPT) $(DEBUG) $(INCLUDES)
+CFLAGS += -Wall -Wextra
+CFLAGS += -Wcast-align -Wcast-qual -Wimplicit -Wpointer-arith -Wswitch -Wredundant-decls -Wreturn-type -Wshadow -Wunused
+# Linker options
+LDFLAGS = $(OPT) -nostartfiles -Wl,-Map=$(PROJECT).map -T$(LINKER_SCRIPT) -nostdlib
+# Assembler options
 ASFLAGS = -ahls -mcpu=cortex-m3 -mthumb
 
 # Compiler/Assembler/Linker Paths
@@ -32,7 +34,7 @@ REMOVE = rm -f
 all: $(PROJECT).hex $(PROJECT).bin
 
 $(PROJECT).bin: $(PROJECT).elf
-	$(OBJCOPY) -O binary -S $(PROJECT).elf $(PROJECT).bin
+	$(OBJCOPY) -R .stack -R .bss -O binary -S $(PROJECT).elf $(PROJECT).bin
 
 $(PROJECT).hex: $(PROJECT).elf
 	$(OBJCOPY) -R .stack -R .bss -O ihex $(PROJECT).elf $(PROJECT).hex
@@ -54,7 +56,7 @@ clean:
 #########################################################################
 
 %.o : %.c
-	$(CC) $(GCFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 #########################################################################
 
