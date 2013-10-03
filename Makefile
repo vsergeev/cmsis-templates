@@ -15,7 +15,7 @@ CFLAGS += $(OPT) $(DEBUG) $(INCLUDES)
 CFLAGS += -Wall -Wextra
 CFLAGS += -Wcast-align -Wcast-qual -Wimplicit -Wpointer-arith -Wswitch -Wredundant-decls -Wreturn-type -Wshadow -Wunused
 # Linker options
-LDFLAGS = $(OPT) -nostartfiles -Wl,-Map=$(PROJECT).map -T$(LINKER_SCRIPT) -nostdlib
+LDFLAGS = -mcpu=cortex-m3 -mthumb $(OPT) -nostartfiles -Wl,-Map=$(PROJECT).map -T$(LINKER_SCRIPT) -nostdlib
 # Assembler options
 ASFLAGS = -ahls -mcpu=cortex-m3 -mthumb
 
