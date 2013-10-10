@@ -10,14 +10,14 @@ DEBUG =
 INCLUDES = -Icore/ -Ilpc11xx/
 
 # Compiler Options
-CFLAGS = -fno-common -mcpu=cortex-m3 -mthumb
+CFLAGS = -fno-common -mcpu=cortex-m0 -mthumb
 CFLAGS += $(OPT) $(DEBUG) $(INCLUDES)
 CFLAGS += -Wall -Wextra
 CFLAGS += -Wcast-align -Wcast-qual -Wimplicit -Wpointer-arith -Wswitch -Wredundant-decls -Wreturn-type -Wshadow -Wunused
 # Linker options
-LDFLAGS = -mcpu=cortex-m3 -mthumb $(OPT) -nostartfiles -Wl,-Map=$(PROJECT).map -T$(LINKER_SCRIPT) -nostdlib
+LDFLAGS = -mcpu=cortex-m0 -mthumb $(OPT) -nostartfiles -Wl,-Map=$(PROJECT).map -T$(LINKER_SCRIPT)
 # Assembler options
-ASFLAGS = -ahls -mcpu=cortex-m3 -mthumb
+ASFLAGS = -ahls -mcpu=cortex-m0 -mthumb
 
 # Compiler/Assembler/Linker Paths
 CROSS = arm-none-eabi-
