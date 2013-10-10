@@ -1,9 +1,9 @@
 /**************************************************************************//**
- * @file     system_LPC13xx.h
- * @brief    CMSIS Cortex-M3 Device Peripheral Access Layer Header File
- *           for the NXP LPC13xx Device Series
- * @version  V1.01
- * @date     19. October 2009
+ * @file     system_LPC11xx.h
+ * @brief    CMSIS Cortex-M0 Device Peripheral Access Layer Header File
+ *           for the NXP LPC11xx Device Series
+ * @version  V1.00
+ * @date     17. November 2009
  *
  * @note
  * Copyright (C) 2009 ARM Limited. All rights reserved.
@@ -23,8 +23,8 @@
  ******************************************************************************/
 
 
-#ifndef __SYSTEM_LPC13xx_H
-#define __SYSTEM_LPC13xx_H
+#ifndef __SYSTEM_LPC11xx_H
+#define __SYSTEM_LPC11xx_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -61,4 +61,4 @@ extern void SystemCoreClockUpdate (void);
 }
 #endif
 
-#endif /* __SYSTEM_LPC13x_H */
+#endif /* __SYSTEM_LPC11x_H */

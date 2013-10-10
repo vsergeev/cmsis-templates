@@ -13,29 +13,37 @@ extern int main(void);
 
 #define WEAK_ALIAS(x) __attribute__ ((weak, alias(#x)))
 
-/* Cortex M3 core interrupt handlers */
+/* Cortex M0 core interrupt handlers */
 void Reset_Handler(void);
 void NMI_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void HardFault_Handler(void) WEAK_ALIAS(Dummy_Handler);
-void MemManage_Handler(void) WEAK_ALIAS(Dummy_Handler);
-void BusFault_Handler(void) WEAK_ALIAS(Dummy_Handler);
-void UsageFault_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void SVC_Handler(void) WEAK_ALIAS(Dummy_Handler);
-void DebugMon_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void PendSV_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void SysTick_Handler(void) WEAK_ALIAS(Dummy_Handler);
 
-/* LPC13xx specific interrupt handlers */
-void WAKEUP_Handler(void) WEAK_ALIAS(Dummy_Handler);
+/* LPC11xx specific interrupt handlers */
+void WAKEUP0_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP1_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP2_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP3_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP4_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP5_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP6_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP7_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP8_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP9_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP10_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP11_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void WAKEUP12_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void CAN_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void SSP1_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void I2C_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void TIMER_16_0_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void TIMER_16_1_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void TIMER_32_0_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void TIMER_32_1_Handler(void) WEAK_ALIAS(Dummy_Handler);
-void SSP_Handler(void) WEAK_ALIAS(Dummy_Handler);
+void SSP0_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void UART_Handler(void) WEAK_ALIAS(Dummy_Handler);
-void USB_IRQ_Handler(void) WEAK_ALIAS(Dummy_Handler);
-void USB_FIQ_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void ADC_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void WDT_Handler(void) WEAK_ALIAS(Dummy_Handler);
 void BOD_Handler(void) WEAK_ALIAS(Dummy_Handler);
@@ -52,46 +60,52 @@ void *vector_table[] __attribute__ ((section(".vectors"))) = {
 	Reset_Handler,
 	NMI_Handler,
 	HardFault_Handler,
-	MemManage_Handler,
-	BusFault_Handler,
-	UsageFault_Handler,
+	0,
+	0,
+	0,
 	0,
 	0,
 	0,
 	0,
 	SVC_Handler,
-	DebugMon_Handler,
+	0,
 	0,
 	PendSV_Handler,
 	SysTick_Handler,
 
-	/* LPC13xx specific interrupt vectors */
-	WAKEUP_Handler, WAKEUP_Handler, WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	I2C_Handler,
-	TIMER_16_0_Handler,
-	TIMER_16_1_Handler,
-	TIMER_32_0_Handler,
-	TIMER_32_1_Handler,
-	SSP_Handler,
-	UART_Handler,
-	USB_IRQ_Handler,
-	USB_FIQ_Handler,
-	ADC_Handler,
-	WDT_Handler,
-	BOD_Handler,
-	EINT3_Handler,
-	EINT2_Handler,
-	EINT1_Handler,
-	EINT0_Handler,
+	/* LPC11xx specific interrupt vectors */
+    WAKEUP0_Handler,
+    WAKEUP1_Handler,
+    WAKEUP2_Handler,
+    WAKEUP3_Handler,
+    WAKEUP4_Handler,
+    WAKEUP5_Handler,
+    WAKEUP6_Handler,
+    WAKEUP7_Handler,
+    WAKEUP8_Handler,
+    WAKEUP9_Handler,
+    WAKEUP10_Handler,
+    WAKEUP11_Handler,
+    WAKEUP12_Handler,
+    CAN_Handler,
+    SSP1_Handler,
+    I2C_Handler,
+    TIMER_16_0_Handler,
+    TIMER_16_1_Handler,
+    TIMER_32_0_Handler,
+    TIMER_32_1_Handler,
+    SSP0_Handler,
+    UART_Handler,
+    Dummy_Handler,  /* Reserved */
+    Dummy_Handler,  /* Reserved */
+    ADC_Handler,
+    WDT_Handler,
+    BOD_Handler,
+    Dummy_Handler,  /* Reserved */
+    EINT3_Handler,
+    EINT2_Handler,
+    EINT1_Handler,
+    EINT0_Handler,
 };
 
 void Reset_Handler(void) {

@@ -1,13 +1,13 @@
 # Project Name
 PROJECT = blink
 # List of the objects files to be made
-OBJECTS = lpc13xx/system_LPC13xx.o startup.o main.o
+OBJECTS = lpc11xx/system_LPC11xx.o startup.o main.o
 # Linker script
-LINKER_SCRIPT = lpc1311.dld
+LINKER_SCRIPT = lpc1111.dld
 
 OPT = -Os
 DEBUG =
-INCLUDES = -Icore/ -Ilpc13xx/
+INCLUDES = -Icore/ -Ilpc11xx/
 
 # Compiler Options
 CFLAGS = -fno-common -mcpu=cortex-m3 -mthumb

@@ -1,9 +1,9 @@
 /**************************************************************************//**
- * @file     system_LPC13xx.c
- * @brief    CMSIS Cortex-M3 Device Peripheral Access Layer Source File
- *           for the NXP LPC13xx Device Series
- * @version  V1.02
- * @date     18. February 2010
+ * @file     system_LPC11xx.c
+ * @brief    CMSIS Cortex-M0 Device Peripheral Access Layer Source File
+ *           for the NXP LPC11xx Device Series
+ * @version  V1.00
+ * @date     17. November 2009
  *
  * @note
  * Copyright (C) 2009 ARM Limited. All rights reserved.
@@ -22,13 +22,9 @@
  *
  ******************************************************************************/
 
-// ******** Code Red **************
-// * Changed USBCLK_SETUP to 1
-// * Changed SYSPLLCTRL_Val to 0x25
-// ********************************
 
 #include <stdint.h>
-#include "LPC13xx.h"
+#include "LPC11xx.h"
 
 /*
 //-------- <<< Use Configuration Wizard in Context Menu >>> ------------------
@@ -95,43 +91,32 @@
 //                     <2=> WDT Oscillator
 //                     <3=> System PLL Clock Out
 //   </e1>
-//   <e10> USB Clock Setup
-//     <e11> Use USB PLL
-//                     <i> F_pll = M * F_in
-//                     <i> F_in must be in the range of 10 MHz to 25 MHz
-//       <o12.0..1> Select Input Clock for usb_pllclkin (Register: USBPLLCLKSEL)
-//                     <0=> IRC Oscillator
-//                     <1=> System Oscillator
-//       <o13.0..4>   M: PLL Multiplier Selection
-//                     <1-32><#-1>
-//       <o13.5..6>   P: PLL Divider Selection
-//                     <0=> 2
-//                     <1=> 4
-//                     <2=> 8
-//                     <3=> 16
-//       <o13.7>      DIRECT: Direct CCO Clock Output Enable
-//       <o13.8>      BYPASS: PLL Bypass Enable
-//     </e11>
-//   </e10>
-//   <o14.0..7> System AHB Divider <0-255>
+//   <o10.0..7> System AHB Divider <0-255>
 //                     <i> 0 = is disabled
-//   <o15.0>   SYS Clock Enable
-//   <o15.1>   ROM Clock Enable
-//   <o15.2>   RAM Clock Enable
-//   <o15.3>   FLASH1 Clock Enable
-//   <o15.4>   FLASH2 Clock Enable
-//   <o15.5>   I2C Clock Enable
-//   <o15.6>   GPIO Clock Enable
-//   <o15.7>   CT16B0 Clock Enable
-//   <o15.8>   CT16B1 Clock Enable
-//   <o15.9>   CT32B0 Clock Enable
-//   <o15.10>  CT32B1 Clock Enable
-//   <o15.11>  SSP Clock Enable
-//   <o15.12>  UART Clock Enable
-//   <o15.13>  ADC Clock Enable
-//   <o15.14>  USB_REG Clock Enable
-//   <o15.15>  SWDT Clock Enable
-//   <o15.16>  IOCON Clock Enable
+//   <o11.0>   SYS Clock Enable
+//   <o11.1>   ROM Clock Enable
+//   <o11.2>   RAM Clock Enable
+//   <o11.3>   FLASHREG Flash Register Interface Clock Enable
+//   <o11.4>   FLASHARRAY Flash Array Access Clock Enable
+//   <o11.5>   I2C Clock Enable
+//   <o11.6>   GPIO Clock Enable
+//   <o11.7>   CT16B0 Clock Enable
+//   <o11.8>   CT16B1 Clock Enable
+//   <o11.9>   CT32B0 Clock Enable
+//   <o11.10>  CT32B1 Clock Enable
+//   <o11.11>  SSP0 Clock Enable
+//   <o11.12>  UART Clock Enable
+//   <o11.13>  ADC Clock Enable
+//   <o11.15>  WDT Clock Enable
+//   <o11.16>  IOCON Clock Enable
+//   <o11.18>  SSP1 Clock Enable
+//
+//   <o12.0..7> SSP0 Clock Divider <0-255>
+//                     <i> 0 = is disabled
+//   <o13.0..7> UART Clock Divider <0-255>
+//                     <i> 0 = is disabled
+//   <o14.0..7> SSP1 Clock Divider <0-255>
+//                     <i> 0 = is disabled
 // </e>
 */
 #define CLOCK_SETUP           1
@@ -140,20 +125,15 @@
 #define SYSOSCCTRL_Val        0x00000000
 #define WDTOSC_SETUP          0
 #define WDTOSCCTRL_Val        0x000000A0
-#define SYSPLLCLKSEL_Val      0x00000001
+#define SYSPLLCLKSEL_Val      0x00000000
 #define SYSPLL_SETUP          1
-#define SYSPLLCTRL_Val        0x00000025
+#define SYSPLLCTRL_Val        0x00000023
 #define MAINCLKSEL_Val        0x00000003
-
-// ******** Code Red *********
-// * Changed USBCLK_SETUP to 0
-// ***************************
-#define USBCLK_SETUP          0
-#define USBPLL_SETUP          0
-#define USBPLLCLKSEL_Val      0x00000001
-#define USBPLLCTRL_Val        0x00000003
 #define SYSAHBCLKDIV_Val      0x00000001
 #define AHBCLKCTRL_Val        0x0001005F
+#define SSP0CLKDIV_Val        0x00000001
+#define UARTCLKDIV_Val        0x00000001
+#define SSP1CLKDIV_Val        0x00000001
 
 /*--------------------- Memory Mapping Configuration -------------------------
 //
@@ -199,24 +179,24 @@
    #error "MAINCLKSEL: Invalid values of reserved bits!"
 #endif
 
-#if (CHECK_RANGE((USBPLLCLKSEL_Val), 0, 1))
-   #error "USBPLLCLKSEL: Value out of range!"
-#endif
-
-#if (CHECK_RSVD((USBPLLCTRL_Val),  ~0x000001FF))
-   #error "USBPLLCTRL: Invalid values of reserved bits!"
-#endif
-
-#if (CHECK_RSVD((USBPLLUEN_Val),   ~0x00000001))
-   #error "USBPLLUEN: Invalid values of reserved bits!"
-#endif
-
 #if (CHECK_RANGE((SYSAHBCLKDIV_Val), 0, 255))
    #error "SYSAHBCLKDIV: Value out of range!"
 #endif
 
 #if (CHECK_RSVD((AHBCLKCTRL_Val),  ~0x0001FFFF))
    #error "AHBCLKCTRL: Invalid values of reserved bits!"
+#endif
+
+#if (CHECK_RANGE((SSP0CLKDIV_Val), 0, 255))
+   #error "SSP0CLKDIV: Value out of range!"
+#endif
+
+#if (CHECK_RANGE((UARTCLKDIV_Val), 0, 255))
+   #error "UARTCLKDIV: Value out of range!"
+#endif
+
+#if (CHECK_RANGE((SSP1CLKDIV_Val), 0, 255))
+   #error "SSP1CLKDIV: Value out of range!"
 #endif
 
 #if (CHECK_RSVD((SYSMEMREMAP_Val), ~0x00000003))
@@ -456,28 +436,11 @@ void SystemInit (void)
   while (!(LPC_SYSCON->MAINCLKUEN & 0x01));       /* Wait Until Updated       */
 #endif
 
-#if (USBCLK_SETUP)                                /* USB Clock Setup          */
-  LPC_SYSCON->PDRUNCFG     &= ~(1 << 10);         /* Power-up USB PHY         */
-#if (USBPLL_SETUP)                                /* USB PLL Setup            */
-  LPC_SYSCON->PDRUNCFG     &= ~(1 <<  8);         /* Power-up USB PLL         */
-  LPC_SYSCON->USBPLLCLKSEL  = USBPLLCLKSEL_Val;   /* Select PLL Input         */
-  LPC_SYSCON->USBPLLCLKUEN  = 0x01;               /* Update Clock Source      */
-  LPC_SYSCON->USBPLLCLKUEN  = 0x00;               /* Toggle Update Register   */
-  LPC_SYSCON->USBPLLCLKUEN  = 0x01;
-  while (!(LPC_SYSCON->USBPLLCLKUEN & 0x01));     /* Wait Until Updated       */
-  LPC_SYSCON->USBPLLCTRL    = USBPLLCTRL_Val;
-  while (!(LPC_SYSCON->USBPLLSTAT   & 0x01));     /* Wait Until PLL Locked    */
-  LPC_SYSCON->USBCLKSEL     = 0x00;               /* Select USB PLL           */
-#else
-  LPC_SYSCON->USBCLKSEL     = 0x01;               /* Select Main Clock        */
-#endif
-#else
-  LPC_SYSCON->PDRUNCFG     |=  (1 << 10);         /* Power-down USB PHY       */
-  LPC_SYSCON->PDRUNCFG     |=  (1 <<  8);         /* Power-down USB PLL       */
-#endif
-
   LPC_SYSCON->SYSAHBCLKDIV  = SYSAHBCLKDIV_Val;
   LPC_SYSCON->SYSAHBCLKCTRL = AHBCLKCTRL_Val;
+  LPC_SYSCON->SSP0CLKDIV    = SSP0CLKDIV_Val;
+  LPC_SYSCON->UARTCLKDIV    = UARTCLKDIV_Val;
+  LPC_SYSCON->SSP1CLKDIV    = SSP1CLKDIV_Val;
 #endif
 
 
