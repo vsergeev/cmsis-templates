@@ -1,4 +1,4 @@
-## CMSIS v3.20 LPC13xx Project Template for GNU ARM Tools
+## CMSIS v3.20 LPC13xx Template for GNU ARM Tools
 
 * CMSIS v3.20 core support from ARM in `core/`
 
