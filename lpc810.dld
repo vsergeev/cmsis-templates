@@ -1,12 +1,14 @@
 ENTRY(Reset_Handler)
 
+/* Memory configuration for LPC810M021FN8 */
+
 MEMORY
 {
-	sram	:	ORIGIN = 0x10000000, LENGTH = 2k
-	flash	:	ORIGIN = 0x00000000, LENGTH = 8k
+	sram	:	ORIGIN = 0x10000000, LENGTH = 1k
+	flash	:	ORIGIN = 0x00000000, LENGTH = 4k
 }
 
-_end_stack = 0x100007FC;
+_end_stack = 0x100003FC;
 
 SECTIONS {
 	. = ORIGIN(flash);

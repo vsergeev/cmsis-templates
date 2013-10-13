@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#include "LPC11xx.h"
+#include "LPC8xx.h"
 
 volatile uint32_t msTicks = 0;
 
@@ -18,12 +18,12 @@ int main(void) {
     SystemInit();
 	SysTick_Config(SystemCoreClock/1000);
 
-	LPC_GPIO1->DIR = (1<<3)|(1<<2)|(1<<1)|(1<<0);
+    /* Setup GPIO here */
 
 	while (1) {
-		LPC_GPIO1->DATA = (1<<3)|(1<<2)|(1<<1)|(1<<0);
+        /* GPIO on */
 		delay_ms(500);
-		LPC_GPIO1->DATA = 0;
+        /* GPIO off */
 		delay_ms(500);
 	}
 
