@@ -2,13 +2,13 @@
 
 * CMSIS v3.20 core support from ARM in `core/`
 
-* Vendor chip support from NXP's ["LPC13xx(12-bit ADC)-LPCXpresso examples_v1.01.zip"](http://lpcware.com/content/nxpfile/lpcxpresso-example-projects-and-cmsis-library-lpc13151617454647) package in `lpc13xx/`
+* Vendor chip support from NXP's ["lpc175x_6x_cmsis_driver_library.zip"](http://lpcware.com/content/nxpfile/lpc175x6x-cmsis-compliant-standard-peripheral-firmware-driver-library-keil-iar-gnu) package in `lpc17xx/`
 
 * Makefile, linker script, and all code in the root directory are 100% public domain.
 
-* `system_LPC13xx.c` configured to use internal 12MHz oscillator and PLL for a system clock of 72MHz.
+* `system_LPC17xx.c` configured to use an external 12MHz crystal, a 100MHz system clock from PLL0, and a 48MHz clock from PLL1.
 
 See http://vsdev.me/notes/cortex_cmsis/ for more information.
 
-Check out the lpc13xx, lpc11xx, and lpc8xx branches for other templates.
+Check out the lpc8xx, lpc11xx, lpc13xx, and lpc17xx branches for other templates.
 

@@ -1,14 +1,14 @@
 ENTRY(Reset_Handler)
 
-/* Memory configuration for LPC1313FBD48 */
+/* Memory configuration for LPC1768FBD100 */
 
 MEMORY
 {
-	flash	:	ORIGIN = 0x00000000, LENGTH = 32k
-	sram	:	ORIGIN = 0x10000000, LENGTH = 8k
+	flash	:	ORIGIN = 0x00000000, LENGTH = 512k
+	sram	:	ORIGIN = 0x10000000, LENGTH = 64k
 }
 
-_end_stack = 0x10001FFC;
+_end_stack = 0x10007FFC;
 
 SECTIONS {
 	. = ORIGIN(flash);
