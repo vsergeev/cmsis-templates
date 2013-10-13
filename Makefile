@@ -3,7 +3,7 @@ PROJECT = blink
 # List of the objects files to be made
 OBJECTS = lpc11xx/system_LPC11xx.o startup.o main.o
 # Linker script
-LINKER_SCRIPT = lpc1111.dld
+LINKER_SCRIPT = lpc1114.dld
 
 OPT = -Os
 DEBUG =
