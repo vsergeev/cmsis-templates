@@ -2,7 +2,7 @@
 
 * CMSIS v3.20 core support from ARM in `core/`
 
-* Vendor chip support from NXP's "LPC800 LPCXpresso Examples" package in `lpc8xx/`
+* Vendor chip support from NXP's ["LPC800 LPCXpresso Examples V1.03.zip"](http://lpcware.com/content/nxpfile/lpcxpresso-sample-code-bundle-lpc8xx) package in `lpc8xx/`
 
 * Makefile, linker script, and all code in the root directory are 100% public domain.
 
