@@ -2,7 +2,7 @@
 
 * CMSIS v3.20 core support from ARM in `core/`
 
-* Vendor chip support from NXP's CMSISv2p00_LPC13xx package in `lpc13xx/`
+* Vendor chip support from NXP's ["LPC13xx(12-bit ADC)-LPCXpresso examples_v1.01.zip"](http://lpcware.com/content/nxpfile/lpcxpresso-example-projects-and-cmsis-library-lpc13151617454647) package in `lpc13xx/`
 
 * Makefile, linker script, and all code in the root directory are 100% public domain.
 
