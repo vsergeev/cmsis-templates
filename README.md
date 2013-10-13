@@ -8,5 +8,5 @@
 
 See http://vsdev.me/notes/cortex_cmsis/ for more information.
 
-Check out the lpc13xx branch for the lpc13xx template.
+Check out the lpc13xx, lpc11xx, and lpc8xx branches for other templates.
 
