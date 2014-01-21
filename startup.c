@@ -59,24 +59,24 @@ void Dummy_Handler(void);
 
 /* Stack top and vector handler table */
 void *vector_table[] __attribute__ ((section(".vectors"))) = {
-	&_end_stack,
-	Reset_Handler,
-	NMI_Handler,
-	HardFault_Handler,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	SVC_Handler,
-	0,
-	0,
-	PendSV_Handler,
-	SysTick_Handler,
+    &_end_stack,
+    Reset_Handler,
+    NMI_Handler,
+    HardFault_Handler,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    SVC_Handler,
+    0,
+    0,
+    PendSV_Handler,
+    SysTick_Handler,
 
-	/* LPC11xx specific interrupt vectors */
+    /* LPC11xx specific interrupt vectors */
     SPI0_Handler,
     SPI1_Handler,
     Dummy_Handler,      /* Reserved */
@@ -112,24 +112,24 @@ void *vector_table[] __attribute__ ((section(".vectors"))) = {
 };
 
 void Reset_Handler(void) {
-	uint32_t *src, *dst;
+    uint32_t *src, *dst;
 
-	/* Copy data section from flash to RAM */
-	src = &_end_text;
-	dst = &_start_data;
-	while (dst < &_end_data)
-		*dst++ = *src++;
+    /* Copy data section from flash to RAM */
+    src = &_end_text;
+    dst = &_start_data;
+    while (dst < &_end_data)
+        *dst++ = *src++;
 
-	/* Clear the bss section */
-	dst = &_start_bss;
-	while (dst < &_end_bss)
-		*dst++ = 0;
+    /* Clear the bss section */
+    dst = &_start_bss;
+    while (dst < &_end_bss)
+        *dst++ = 0;
 
-	main();
+    main();
 }
 
 void Dummy_Handler(void) {
-	while (1)
-		;
+    while (1)
+        ;
 }
 
