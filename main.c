@@ -16,6 +16,7 @@ void delay_ms(uint32_t ms) {
 
 int main(void) {
     SystemInit();
+    SystemCoreClockUpdate();
 	SysTick_Config(SystemCoreClock/1000);
 
 	LPC_GPIO3->FIODIR = (1<<3)|(1<<2)|(1<<1)|(1<<0);
