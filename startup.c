@@ -48,71 +48,71 @@ void Dummy_Handler(void);
 
 /* Stack top and vector handler table */
 void *vector_table[] __attribute__ ((section(".vectors"))) = {
-	&_end_stack,
-	Reset_Handler,
-	NMI_Handler,
-	HardFault_Handler,
-	MemManage_Handler,
-	BusFault_Handler,
-	UsageFault_Handler,
-	0,
-	0,
-	0,
-	0,
-	SVC_Handler,
-	DebugMon_Handler,
-	0,
-	PendSV_Handler,
-	SysTick_Handler,
+    &_end_stack,
+    Reset_Handler,
+    NMI_Handler,
+    HardFault_Handler,
+    MemManage_Handler,
+    BusFault_Handler,
+    UsageFault_Handler,
+    0,
+    0,
+    0,
+    0,
+    SVC_Handler,
+    DebugMon_Handler,
+    0,
+    PendSV_Handler,
+    SysTick_Handler,
 
-	/* LPC13xx specific interrupt vectors */
-	WAKEUP_Handler, WAKEUP_Handler, WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,	WAKEUP_Handler,
-	I2C_Handler,
-	TIMER_16_0_Handler,
-	TIMER_16_1_Handler,
-	TIMER_32_0_Handler,
-	TIMER_32_1_Handler,
-	SSP_Handler,
-	UART_Handler,
-	USB_IRQ_Handler,
-	USB_FIQ_Handler,
-	ADC_Handler,
-	WDT_Handler,
-	BOD_Handler,
-	EINT3_Handler,
-	EINT2_Handler,
-	EINT1_Handler,
-	EINT0_Handler,
+    /* LPC13xx specific interrupt vectors */
+    WAKEUP_Handler, WAKEUP_Handler, WAKEUP_Handler,    WAKEUP_Handler,
+    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,
+    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,
+    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,
+    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,
+    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,
+    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,
+    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,
+    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,
+    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,    WAKEUP_Handler,
+    I2C_Handler,
+    TIMER_16_0_Handler,
+    TIMER_16_1_Handler,
+    TIMER_32_0_Handler,
+    TIMER_32_1_Handler,
+    SSP_Handler,
+    UART_Handler,
+    USB_IRQ_Handler,
+    USB_FIQ_Handler,
+    ADC_Handler,
+    WDT_Handler,
+    BOD_Handler,
+    EINT3_Handler,
+    EINT2_Handler,
+    EINT1_Handler,
+    EINT0_Handler,
 };
 
 void Reset_Handler(void) {
-	uint32_t *src, *dst;
+    uint32_t *src, *dst;
 
-	/* Copy data section from flash to RAM */
-	src = &_end_text;
-	dst = &_start_data;
-	while (dst < &_end_data)
-		*dst++ = *src++;
+    /* Copy data section from flash to RAM */
+    src = &_end_text;
+    dst = &_start_data;
+    while (dst < &_end_data)
+        *dst++ = *src++;
 
-	/* Clear the bss section */
-	dst = &_start_bss;
-	while (dst < &_end_bss)
-		*dst++ = 0;
+    /* Clear the bss section */
+    dst = &_start_bss;
+    while (dst < &_end_bss)
+        *dst++ = 0;
 
-	main();
+    main();
 }
 
 void Dummy_Handler(void) {
-	while (1)
-		;
+    while (1)
+        ;
 }
 
