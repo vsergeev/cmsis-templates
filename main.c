@@ -16,6 +16,7 @@ void delay_ms(uint32_t ms) {
 
 int main(void) {
     SystemInit();
+    SystemCoreClockUpdate();
 	SysTick_Config(SystemCoreClock/1000);
 
     /* Setup GPIO here */
