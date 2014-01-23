@@ -1,13 +1,22 @@
 # Project Name
 PROJECT = blink
-# List of the objects files to be made
-OBJECTS = lpc17xx/system_LPC17xx.o startup.o main.o
+# Source files
+SOURCES = lpc17xx/system_LPC17xx.c startup.c main.c
 # Linker script
 LINKER_SCRIPT = lpc1768.dld
 
-OPT = -Os
+#########################################################################
+
+OBJDIR = obj
+OBJECTS = $(patsubst %.c,$(OBJDIR)/%.o,$(SOURCES))
+
+#########################################################################
+
+OPT = -Os -g
 DEBUG =
 INCLUDES = -Icore/ -Ilpc17xx/
+
+#########################################################################
 
 # Compiler Options
 CFLAGS = -fno-common -mcpu=cortex-m3 -mthumb
@@ -47,7 +56,7 @@ stats: $(PROJECT).elf
 	$(SIZE) $(PROJECT).elf
 
 clean:
-	$(REMOVE) $(OBJECTS)
+	$(REMOVE) -r $(OBJDIR)
 	$(REMOVE) $(PROJECT).elf
 	$(REMOVE) $(PROJECT).hex
 	$(REMOVE) $(PROJECT).bin
@@ -55,8 +64,13 @@ clean:
 
 #########################################################################
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJECTS): | $(OBJDIR)
 
-#########################################################################
+$(OBJDIR):
+	mkdir $(OBJDIR)
+	mkdir $(OBJDIR)/lpc17xx
+	mkdir $(OBJDIR)/core
+
+$(OBJDIR)/%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
