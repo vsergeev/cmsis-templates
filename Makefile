@@ -1,13 +1,22 @@
 # Project Name
 PROJECT = blink
-# List of the objects files to be made
-OBJECTS = lpc8xx/system_LPC8xx.o startup.o main.o
+# Source files
+SOURCES = lpc8xx/system_LPC8xx.c startup.c main.c
 # Linker script
 LINKER_SCRIPT = lpc810.dld
 
-OPT = -Os
+#########################################################################
+
+OBJDIR = obj
+OBJECTS = $(patsubst %.c,$(OBJDIR)/%.o,$(SOURCES))
+
+#########################################################################
+
+OPT = -Os -g
 DEBUG =
 INCLUDES = -Icore/ -Ilpc8xx/
+
+#########################################################################
 
 # Compiler Options
 CFLAGS = -fno-common -mcpu=cortex-m0 -mthumb
@@ -47,7 +56,7 @@ stats: $(PROJECT).elf
 	$(SIZE) $(PROJECT).elf
 
 clean:
-	$(REMOVE) $(OBJECTS)
+	$(REMOVE) -r $(OBJDIR)
 	$(REMOVE) $(PROJECT).elf
 	$(REMOVE) $(PROJECT).hex
 	$(REMOVE) $(PROJECT).bin
@@ -55,8 +64,13 @@ clean:
 
 #########################################################################
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJECTS): | $(OBJDIR)
 
-#########################################################################
+$(OBJDIR):
+	mkdir $(OBJDIR)
+	mkdir $(OBJDIR)/lpc8xx
+	mkdir $(OBJDIR)/core
+
+$(OBJDIR)/%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
