@@ -24,7 +24,7 @@ CFLAGS += $(OPT) $(DEBUG) $(INCLUDES)
 CFLAGS += -Wall -Wextra
 CFLAGS += -Wcast-align -Wcast-qual -Wimplicit -Wpointer-arith -Wswitch -Wredundant-decls -Wreturn-type -Wshadow -Wunused
 # Linker options
-LDFLAGS = -mcpu=cortex-m3 -mthumb $(OPT) -nostartfiles -Wl,-Map=$(PROJECT).map -T$(LINKER_SCRIPT) -nostdlib
+LDFLAGS = -mcpu=cortex-m3 -mthumb $(OPT) -nostartfiles -Wl,-Map=$(OBJDIR)/$(PROJECT).map -T$(LINKER_SCRIPT) -nostdlib
 # Assembler options
 ASFLAGS = -ahls -mcpu=cortex-m3 -mthumb
 
@@ -40,6 +40,7 @@ REMOVE = rm -f
 
 #########################################################################
 
+.PHONY: all
 all: $(PROJECT).hex $(PROJECT).bin
 
 $(PROJECT).bin: $(PROJECT).elf
@@ -51,26 +52,21 @@ $(PROJECT).hex: $(PROJECT).elf
 $(PROJECT).elf: $(OBJECTS) $(LINKER_SCRIPT)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $(PROJECT).elf
 
+.PHONY: stats
 stats: $(PROJECT).elf
 	$(OBJDUMP) -th $(PROJECT).elf
 	$(SIZE) $(PROJECT).elf
 
+.PHONY: clean
 clean:
 	$(REMOVE) -r $(OBJDIR)
 	$(REMOVE) $(PROJECT).elf
 	$(REMOVE) $(PROJECT).hex
 	$(REMOVE) $(PROJECT).bin
-	$(REMOVE) $(PROJECT).map
 
 #########################################################################
 
-$(OBJECTS): | $(OBJDIR)
-
-$(OBJDIR):
-	mkdir $(OBJDIR)
-	mkdir $(OBJDIR)/lpc13xx
-	mkdir $(OBJDIR)/core
-
 $(OBJDIR)/%.o : %.c
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
