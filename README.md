@@ -8,7 +8,7 @@
 
 * `system_LPC8xx.c` configured to use internal 12MHz oscillator and PLL for a system clock of 30MHz.
 
-See http://vsdev.me/notes/cortex_cmsis/ for more information.
+See http://theanine.io/notes/cortex_cmsis/ for more information.
 
 Check out the lpc8xx, lpc11xx, lpc13xx, and lpc17xx branches for other templates.
 
