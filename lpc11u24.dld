@@ -4,11 +4,11 @@ ENTRY(Reset_Handler)
 
 MEMORY
 {
-	flash	:	ORIGIN = 0x00000000, LENGTH = 32k
-	sram	:	ORIGIN = 0x10000000, LENGTH = 4k
+	flash	:	ORIGIN = 0x00000000, LENGTH = 32K
+	sram	:	ORIGIN = 0x10000000, LENGTH = 8K
 }
 
-_end_stack = 0x10000FFC;
+_end_stack = 0x10002000;
 
 SECTIONS {
 	. = ORIGIN(flash);
