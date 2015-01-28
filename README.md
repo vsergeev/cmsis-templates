@@ -10,5 +10,5 @@
 
 See http://theanine.io/notes/cortex_cmsis/ for more information.
 
-Check out the lpc8xx, lpc11xx, lpc13xx, and lpc17xx branches for other templates.
+Check out the lpc8xx, lpc11xx, lpc11uxx, lpc13xx, and lpc17xx branches for other templates.
 
