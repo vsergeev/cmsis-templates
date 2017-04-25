@@ -8,7 +8,7 @@
 
 * `system_LPC17xx.c` configured to use an external 12MHz crystal, a 100MHz system clock from PLL0, and a 48MHz clock from PLL1.
 
-See http://theanine.io/notes/cortex_cmsis/ for more information.
+See http://sergeev.io/notes/cortex_cmsis/ for more information.
 
 Check out the lpc8xx, lpc11xx, lpc13xx, and lpc17xx branches for other templates.
 
